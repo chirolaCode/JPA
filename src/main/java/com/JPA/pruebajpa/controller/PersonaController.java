@@ -62,4 +62,12 @@ public class PersonaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Persona no encontrada.");
         }
     }
-}
+
+
+@PutMapping("/personas/editar")
+public Persona editPersona(@RequestBody Persona per){
+    persoServ.editPersona(per);
+
+
+    return persoServ.findPersona(per.getId());
+}}
