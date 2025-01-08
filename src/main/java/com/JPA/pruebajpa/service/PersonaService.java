@@ -6,50 +6,42 @@ import org.springframework.stereotype.Service;
 import com.JPA.pruebajpa.model.Persona;
 import com.JPA.pruebajpa.repository.IPersonaRepository;
 
-
-
 @Service
-public class PersonaService implements IPersonaService   {
+public class PersonaService implements IPersonaService {
 
-    @Autowired 
+    @Autowired
     private IPersonaRepository persoRepo;
 
     @Override
     public List<Persona> getPersonas() {
-        List<Persona>listaPersonas=persoRepo.findAll();
-        return listaPersonas;
+        return persoRepo.findAll();
     }
 
     @Override
     public void savePersona(Persona perso) {
-        persoRepo.save(perso);
+        persoRepo.save(perso); // El ID lo genera la base de datos automáticamente
     }
 
     @Override
     public void deletePersona(Long id) {
         persoRepo.deleteById(id);
-
     }
 
     @Override
     public Persona findPersona(Long id) {
-        Persona  perso=persoRepo.findById(id).orElse(null);
-        return perso;
+        return persoRepo.findById(id).orElse(null);
     }
 
     @Override
     public void editPersona(Long idOriginal, Long idNueva, String nuevoApellido, String nuevoNombre,
-     int nuevaEdad) {
-        Persona perso=this.findPersona(idOriginal);
-
-        perso.setId(idNueva);
-        perso.setNombre(nuevoNombre);
-        perso.setApellido(nuevoApellido);
-        perso.setEdad(nuevaEdad);
-     
-        this.savePersona(perso);
-
-        
+                             int nuevaEdad) {
+        Persona perso = this.findPersona(idOriginal);
+        if (perso != null) {
+            perso.setId(idOriginal); // No debes cambiar el ID
+            perso.setNombre(nuevoNombre);
+            perso.setApellido(nuevoApellido);
+            perso.setEdad(nuevaEdad);
+            this.savePersona(perso);
+        }
     }
-
-} 
+}

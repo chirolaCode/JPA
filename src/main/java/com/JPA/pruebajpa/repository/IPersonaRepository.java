@@ -6,6 +6,4 @@ import com.JPA.pruebajpa.model.Persona;
 
 @Repository
 public interface IPersonaRepository extends JpaRepository<Persona, Long> {
-
-
 }

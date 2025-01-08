@@ -2,7 +2,8 @@ package com.JPA.pruebajpa.service;
 
 import com.JPA.pruebajpa.model.Persona;
 import java.util.List;
-public interface IPersonaService{
+
+public interface IPersonaService {
 
     public List<Persona> getPersonas();
 
@@ -13,6 +14,5 @@ public interface IPersonaService{
     public Persona findPersona(Long id);
 
     public void editPersona(Long idOriginal, Long idNueva, String nuevoApellido,
-     String nuevoNombre, int nuevaEdad);
-
+                             String nuevoNombre, int nuevaEdad);
 }
